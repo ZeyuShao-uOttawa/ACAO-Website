@@ -1,0 +1,26 @@
+{
+  "name": "acao-website",
+  "version": "1.0.0",
+  "description": "Wiki Page: https://acao-website.atlassian.net/l/cp/sTAms0w1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "nodemon server.js --ignore '../client/'",
+    "start:client": "npm run serve --prefix '../client/'",
+    "dev": "concurrently \"npm run start:server\" \"npm run start:client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7"
+  }
+}
