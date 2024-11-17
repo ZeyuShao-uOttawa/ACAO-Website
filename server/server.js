@@ -17,6 +17,14 @@ app.get('/', (req, res) => {
     res.send('Welcome to ACAO Backend!');
 });
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Handle all other routes with the Vue app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Port for Server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

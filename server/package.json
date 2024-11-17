@@ -1,8 +1,8 @@
 {
-  "name": "acao-website",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Wiki Page: https://acao-website.atlassian.net/l/cp/sTAms0w1",
-  "main": "index.js",
+  "description": "Back-end for ACAO website",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:server": "nodemon server.js --ignore '../client/'",

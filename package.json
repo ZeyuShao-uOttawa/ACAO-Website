@@ -1,0 +1,9 @@
+{
+    "name": "acao-website",
+    "version": "1.0.0",
+    "description": "Deployment to Heroku",
+    "scripts": {
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build && cp -r dist/* ../server/public"
+    }
+}
