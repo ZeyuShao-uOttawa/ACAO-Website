@@ -12,11 +12,6 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Connected to MongoDB');
 }).catch((err) => console.error('MongoDB connection error:', err));
 
-// Basic route
-app.get('/', (req, res) => {
-    res.send('Welcome to ACAO Backend!');
-});
-
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
