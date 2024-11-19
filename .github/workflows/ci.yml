@@ -1,0 +1,29 @@
+name: MEVN Stack CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    working-directory: ./client
+
+    steps:
+    - name: Checkout code of client
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js for client
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install client dependencies
+      run: npm install
+
+    - name: Run client tests
+      run: npm test

@@ -7,7 +7,7 @@
         <b-navbar-brand class="brand hover-text-pink" href="#">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
-                <span class="fs-6">Asian Canadians' <br> Association uOttawa</span>
+                <span class="fs-6">Asian Canadians<br>Association uOttawa</span>
             </div>
         </b-navbar-brand>
 
