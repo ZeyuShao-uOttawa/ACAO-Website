@@ -1,0 +1,60 @@
+name: MEVN Stack CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code of client
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js for client
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install client dependencies
+      working-directory: ./client
+      run: npm install
+
+    - name: Run client tests
+      working-directory: ./client
+      run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code of client
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js for client
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install client dependencies
+      working-directory: ./client
+      run: npm install
+
+    - name: Install server dependencies
+      working-directory: ./server
+      run: npm install
+
+    - name: Build Vue.js Client
+      run: npm run build --prefix client
+
+    - name: Clean up server/public
+      run: rm -rf server/public/*
+      
+    - name: Move Built Client Assets to Server Public
+      run: cp -r client/dist/* server/public/
