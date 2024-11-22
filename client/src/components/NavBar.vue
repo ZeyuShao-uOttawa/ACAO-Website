@@ -15,9 +15,10 @@
 
         <b-collapse id="nav-collapse" class="nav-items-container" is-nav>
             <b-navbar-nav>
-                <b-nav-item class="fs-5 brand" href="">Our Events</b-nav-item>
-                <b-nav-item class="fs-5 brand" href="">Meet the Team</b-nav-item>
-                <b-nav-item class="fs-5 brand" href="">Photo Gallery</b-nav-item>
+                <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Our Events</b-nav-item>
+                <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Meet the Team</b-nav-item>
+                <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Photo Gallery</b-nav-item>
+                <b-button class="brand pink-button" @click="">Sign In</b-button>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -44,14 +45,25 @@
 }
 
 .hover-text-pink:hover {
-    color: pink !important; 
+    color: #ff8ba0 !important; 
 }
 
 .navbar-nav {
-    --bs-nav-link-hover-color: pink !important;
+    --bs-nav-link-hover-color: #ff8ba0 !important;
 }
 
 .navbar-nav {
     --bs-nav-link-color: black !important;
+}
+
+.pink-button {
+  background-color: #ffa8b5;
+  border-color: #ffa8b5;
+  color: white;
+}
+
+.pink-button:hover {
+  background-color: #ff8ba0;
+  border-color: #ff8ba0;
 }
 </style>
