@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import SignInModal from './SignInModal.vue';
 
+const showSignInModal = ref<boolean>(false);
 </script>
 
 <template>
@@ -18,10 +21,12 @@
                 <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Our Events</b-nav-item>
                 <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Meet the Team</b-nav-item>
                 <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Photo Gallery</b-nav-item>
-                <b-button class="brand pink-button" @click="">Sign In</b-button>
+                <b-button class="brand pink-button" @click="showSignInModal = true">Sign In</b-button>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
+
+    <SignInModal v-if="showSignInModal" v-bind:showSignInModal="showSignInModal" @update:showSignInModal="showSignInModal = $event"/>
 </template>
 
 <style scoped>
