@@ -6,25 +6,25 @@ const showSignInModal = ref<boolean>(false);
 </script>
 
 <template>
-    <b-navbar class="lexend sticky-top" toggleable="lg" type="dark" variant="white">
-        <b-navbar-brand class="brand hover-text-pink" href="#">
+    <BNavbar class="lexend sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
+        <BNavbarBrand class="margin-left hover-text-pink" href="#">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
                 <span class="fs-6">Asian Canadians<br>Association uOttawa</span>
             </div>
-        </b-navbar-brand>
+        </BNavbarBrand>
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <BNavbarToggle target="navbar-toggle-collapse"></BNavbarToggle>
 
-        <b-collapse id="nav-collapse" class="nav-items-container" is-nav>
-            <b-navbar-nav>
-                <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Our Events</b-nav-item>
-                <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Meet the Team</b-nav-item>
-                <b-nav-item class="d-flex align-items-center justify-content-center fs-5 brand" href="">Photo Gallery</b-nav-item>
-                <b-button class="brand pink-button" @click="showSignInModal = true">Sign In</b-button>
-            </b-navbar-nav>
-        </b-collapse>
-    </b-navbar>
+        <BCollapse id="navbar-toggle-collapse" is-nav>
+            <BNavbarNav class="ms-auto mb-2 mb-lg-0 margin-right">
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Our Events</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Meet the Team</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
+                <BButton class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
+            </BNavbarNav>
+        </BCollapse>
+    </BNavbar>
 
     <SignInModal v-if="showSignInModal" v-bind:showSignInModal="showSignInModal" @update:showSignInModal="showSignInModal = $event"/>
 </template>
@@ -34,19 +34,18 @@ const showSignInModal = ref<boolean>(false);
     font-family: 'Lexend', sans-serif;
 }
 
-.brand {
+.margin-left {
     margin-left: 2vw;
+}
+
+.margin-left {
+    margin-right: 2vw;
 }
 
 .logo {
     width: 50px;
     height: auto;
     margin-right: 1em;
-}
-
-.nav-items-container {
-    justify-content: flex-end;
-    margin-right: 2vw;
 }
 
 .hover-text-pink:hover {

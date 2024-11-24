@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
+
 interface SignInModalProps {
     showSignInModal: boolean;
 }
@@ -14,12 +16,28 @@ let signInForm: { email: string; password: string } = {
   password: "",
 };
 
+let emailState = ref<boolean|null>(null);
+let passwordState = ref<boolean|null>(null);
+
 const closeSignInModal = () => {
   emit('update:showSignInModal', false);
 };
 
-const onSubmit = () => {
-    alert(JSON.stringify(signInForm))
+const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emailState.value = emailRegex.test(signInForm.email);
+};
+
+const validatePassword = () => {
+    passwordState.value = signInForm.password.length > 0;
+};
+
+const isSignInButtonDisabled = computed(() => {
+    return !(emailState.value == true && passwordState.value == true);
+})
+
+const onSignIn = () => {
+    alert(JSON.stringify(signInForm));
 }
 </script>
 
@@ -39,35 +57,43 @@ const onSubmit = () => {
                         <button type="button" class="btn-close" aria-label="Close" @click="closeSignInModal"></button>
                     </div>
                     <div class="modal-body">
-                        <b-form @submit="onSubmit">
-                            <b-form-group
+                        <BForm>
+                            <BFormGroup
                               id="email-label"
+                              class="mb-2"
                               label="Email address:"
                               label-for="email"
-                              description="We'll never share your email with anyone else."
                             >
-                              <b-form-input
-                                id="email"
-                                v-model="signInForm.email"
-                                type="email"
-                                placeholder="Enter email"
-                                required
-                              ></b-form-input>
-                            </b-form-group>
-                      
-                            <b-form-group id="password-label" label="Password:" label-for="password">
-                              <b-form-input
-                                id="password"
-                                v-model="signInForm.password"
-                                placeholder="Enter name"
-                                required
-                              ></b-form-input>
-                            </b-form-group>
-                          </b-form>
+                                <BFormInput
+                                    id="email"
+                                    v-model="signInForm.email"
+                                    type="email"
+                                    @input="validateEmail"
+                                    :class="{ 'is-invalid': emailState == false  }"
+                                    placeholder="Enter your email"
+                                ></BFormInput>
+                                <BFormInvalidFeedback id="invalid-email">
+                                    Please enter a valid email address.
+                                </BFormInvalidFeedback>
+                            </BFormGroup>
+                            <BFormGroup id="password-label" class="mb-2" label="Password:" label-for="password">
+                                <BFormInput
+                                    id="password"
+                                    v-model="signInForm.password"
+                                    type="password"
+                                    @input="validatePassword"
+                                    :class="{ 'is-invalid': passwordState == false }"
+                                    placeholder="Enter your password"
+                                ></BFormInput>
+                                <BFormInvalidFeedback id="invalid-password">
+                                    Please enter a password
+                                </BFormInvalidFeedback>
+                            </BFormGroup>
+                          </BForm>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeSignInModal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Sign In</button>
+                        <button id="signInButton" type="button" class="btn btn-primary" @click="onSignIn" :disabled="isSignInButtonDisabled">Sign In</button>
                     </div>
                 </div>
             </div>
