@@ -27,6 +27,8 @@ jobs:
       run: npm install
 
     - name: Build Vue.js Client
+      env:
+        VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
       run: npm run build --prefix client
 
     - name: Clean up server/public
