@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import AuthService from '../services/authService';
 import SignInModal from './SignInModal.vue';
 
+const authService = new AuthService();
 const showSignInModal = ref<boolean>(false);
 </script>
 
@@ -21,7 +23,8 @@ const showSignInModal = ref<boolean>(false);
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Our Events</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Meet the Team</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
-                <BButton class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
+                <BButton  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
+                <BButton  v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
             </BNavbarNav>
         </BCollapse>
     </BNavbar>
