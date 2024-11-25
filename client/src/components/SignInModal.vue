@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import AuthService from '../services/authService';
 
 interface SignInModalProps {
     showSignInModal: boolean;
@@ -10,6 +11,8 @@ const props = defineProps<SignInModalProps>();
 const emit = defineEmits<{
     (event: 'update:showSignInModal', value: boolean): void
 }>();
+
+const authService = new AuthService();
 
 let signInForm: { email: string; password: string } = {
   email: "",
@@ -36,8 +39,13 @@ const isSignInButtonDisabled = computed(() => {
     return !(emailState.value == true && passwordState.value == true);
 })
 
-const onSignIn = () => {
-    alert(JSON.stringify(signInForm));
+const onSignIn = async() => {
+    try {
+        await authService.login(signInForm);
+        closeSignInModal();
+    } catch (err) {
+        alert("Invalid credentials");
+    }
 }
 </script>
 
