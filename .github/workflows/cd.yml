@@ -34,3 +34,13 @@ jobs:
 
     - name: Move Built Client Assets to Server Public
       run: cp -r client/dist/* server/public/
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git add server/public/
+        git commit -m "Updated server/public with latest build"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -2,16 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
+const cors = require('cors');
 
 dotenv.config(); // To load environment variables from .env file
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Connected to MongoDB');
 }).catch((err) => console.error('MongoDB connection error:', err));
+
+// Routes
+app.use('/api/auth', require('./routes/authentication'));
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
