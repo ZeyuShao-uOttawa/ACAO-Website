@@ -6,5 +6,7 @@
 </template>
 
 <style scoped>
-
+html {
+  scroll-behavior: smooth;
+}
 </style>
