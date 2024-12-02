@@ -18,6 +18,7 @@ declare module 'vue' {
     BNavbarNav: typeof import('bootstrap-vue-next/components/BNavbar')['BNavbarNav']
     BNavbarToggle: typeof import('bootstrap-vue-next/components/BNavbar')['BNavbarToggle']
     BNavItem: typeof import('bootstrap-vue-next/components/BNav')['BNavItem']
+    EventsPage: typeof import('./src/components/EventsPage.vue')['default']
     HomePage: typeof import('./src/components/HomePage.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     SignInModal: typeof import('./src/components/SignInModal.vue')['default']

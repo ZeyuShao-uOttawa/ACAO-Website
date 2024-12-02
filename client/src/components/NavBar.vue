@@ -3,6 +3,16 @@ import { ref } from 'vue'
 import SignInModal from './SignInModal.vue';
 
 const showSignInModal = ref<boolean>(false);
+
+const scrollToSection = (sectionId: string):void => {
+    const element = document.getElementById(sectionId);
+    const offset = 76;
+    const top = element!.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({
+        top,
+        behavior: 'smooth'
+    });
+}
 </script>
 
 <template>
@@ -18,7 +28,7 @@ const showSignInModal = ref<boolean>(false);
 
         <BCollapse id="navbar-toggle-collapse" is-nav>
             <BNavbarNav class="ms-auto mb-2 mb-lg-0 margin-right">
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Our Events</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#events" @click.prevent="scrollToSection('events')">Our Events</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Meet the Team</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
                 <BButton class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
