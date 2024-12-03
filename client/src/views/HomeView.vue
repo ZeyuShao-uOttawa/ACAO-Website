@@ -5,6 +5,7 @@
 <template>
     <NavBar/>
     <HomePage/>
+    <EventsPage/>
 </template>
 
 <style scoped>

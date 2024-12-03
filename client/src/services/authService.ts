@@ -27,9 +27,15 @@ export default class AuthService {
     }
 
     // Check if a user token is valid
-    async verifyToken(token: string) {
-        return await api.get('/auth/verify', {
-          headers: { 'x-auth-token': token },
-        });
+    async verifyToken() {
+        try {
+            if (this.isAuthenticated()) {
+                await api.get('/auth/verify', {
+                    headers: { 'x-auth-token': localStorage.getItem('authToken') },
+                });
+            }
+        } catch (err) {
+            this.logout();
+        }
     }
 }
