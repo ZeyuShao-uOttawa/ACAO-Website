@@ -122,5 +122,5 @@ const onSignIn = async() => {
     align-items: center;
     justify-content: center;
     z-index: 1200;
-  }
+}
 </style>
