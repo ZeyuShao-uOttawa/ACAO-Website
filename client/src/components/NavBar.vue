@@ -18,7 +18,7 @@ const scrollToSection = (sectionId: string):void => {
 </script>
 
 <template>
-    <BNavbar class="lexend sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
+    <BNavbar class="nav-acao sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
         <BNavbarBrand class="margin-left hover-text-pink" href="#">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
@@ -43,7 +43,7 @@ const scrollToSection = (sectionId: string):void => {
 </template>
 
 <style scoped>
-.lexend {
+.nav-acao {
     font-family: 'Lexend', sans-serif;
 }
 
