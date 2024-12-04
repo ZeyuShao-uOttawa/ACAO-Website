@@ -18,7 +18,7 @@ const scrollToSection = (sectionId: string):void => {
 </script>
 
 <template>
-    <BNavbar class="nav-acao sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
+    <BNavbar class="font-lexand sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
         <BNavbarBrand class="margin-left hover-text-pink" href="#">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
@@ -43,10 +43,6 @@ const scrollToSection = (sectionId: string):void => {
 </template>
 
 <style scoped>
-.nav-acao {
-    font-family: 'Lexend', sans-serif;
-}
-
 .margin-left {
     margin-left: 2vw;
 }
