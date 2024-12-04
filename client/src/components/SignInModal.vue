@@ -50,7 +50,7 @@ const onSignIn = async() => {
 </script>
 
 <template>
-    <div class="modal-backdrop">
+    <div class="modal-backdrop font-lexand">
         <div
             class="modal fade"
             tabindex="-1"
@@ -101,7 +101,7 @@ const onSignIn = async() => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeSignInModal">Cancel</button>
-                        <button id="signInButton" type="button" class="btn btn-primary" @click="onSignIn" :disabled="isSignInButtonDisabled">Sign In</button>
+                        <BButton id="signInButton" type="button" class="pink-button" @click="onSignIn" :disabled="isSignInButtonDisabled">Sign In</BButton>
                     </div>
                 </div>
             </div>

@@ -5,10 +5,20 @@ import SignInModal from './SignInModal.vue';
 
 const authService = new AuthService();
 const showSignInModal = ref<boolean>(false);
+
+const scrollToSection = (sectionId: string):void => {
+    const element = document.getElementById(sectionId);
+    const offset = 76;
+    const top = element!.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({
+        top,
+        behavior: 'smooth'
+    });
+}
 </script>
 
 <template>
-    <BNavbar class="lexend sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
+    <BNavbar class="font-lexand sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
         <BNavbarBrand class="margin-left hover-text-pink" href="#">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
@@ -20,7 +30,7 @@ const showSignInModal = ref<boolean>(false);
 
         <BCollapse id="navbar-toggle-collapse" is-nav>
             <BNavbarNav class="ms-auto mb-2 mb-lg-0 margin-right">
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Our Events</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#events" @click.prevent="scrollToSection('events')">Our Events</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Meet the Team</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
                 <BButton  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
@@ -33,10 +43,6 @@ const showSignInModal = ref<boolean>(false);
 </template>
 
 <style scoped>
-.lexend {
-    font-family: 'Lexend', sans-serif;
-}
-
 .margin-left {
     margin-left: 2vw;
 }
