@@ -16,3 +16,18 @@
 html {
   scroll-behavior: smooth;
 }
+
+.font-lexand {
+  font-family: 'Lexend', sans-serif;
+}
+
+.pink-button {
+  background-color: #ffa8b5;
+  border-color: #ffa8b5;
+  color: white;
+}
+
+.pink-button:hover {
+  background-color: #ff8ba0;
+  border-color: #ff8ba0;
+}
