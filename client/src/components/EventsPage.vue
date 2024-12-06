@@ -40,7 +40,7 @@ const checkUserRoleIsAdmin = (): boolean => {
 }
 
 const registerForEvent = () => {
-    console.log();
+    window.open('https://linktr.ee/uottawaACAO?fbclid=PAZXh0bgNhZW0CMTEAAaaodAAKrYHyVSInSenoUGOiGAxqXO4YHiN35Ui97wWrInG-lBwRIabLbKc_aem_BNJDNNcXcxcdjyFM_8dK0g', '_blank');
 }
 </script>
 
