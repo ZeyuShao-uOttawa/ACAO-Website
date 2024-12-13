@@ -32,8 +32,7 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
 
         res.status(200).json({ message: 'Successfully updated event' });
     } catch (err) {
-        res.status(500).json({ message: err });
-        // res.status(500).json({ error: 'An error occurred while updating the event' });
+        res.status(500).json({ error: 'An error occurred while updating the event' });
     }
 });
 

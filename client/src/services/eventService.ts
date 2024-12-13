@@ -4,6 +4,7 @@ import AuthService from './authService';
 export interface Event {
     eventTitle: string;
     eventDetails: string;
+    eventLocation: string;
     eventPrice: number;
     eventImageUrl: string;
 }
