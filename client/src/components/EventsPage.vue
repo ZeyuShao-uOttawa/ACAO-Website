@@ -54,10 +54,10 @@ const registerForEvent = () => {
                     <h1>Our Upcoming Event</h1>
                 </BCol>
                 <BCol md="6" class="d-flex align-items-center">
-                    <BButton v-if="checkUserRoleIsAdmin()" class="pink-button " @click="showModifyEventModal = true">Edit Event Details</BButton>
+                    <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="showModifyEventModal = true">Edit Event Details</BButton>
                 </BCol>
             </BRow>
-            <BRow class="d-flex">
+            <BRow class="d-flex pb-5">
                 <BCol md="6" class="d-flex justify-content-center align-items-center">
                     <BImg
                     id="event-image" 
@@ -95,7 +95,7 @@ const registerForEvent = () => {
 <style scoped>
 #events {
     background-color: #FFF4E9;
-    height: calc(100vh - 76px);
+    min-height: calc(100vh - 76px);
 }
 
 #event-image {
