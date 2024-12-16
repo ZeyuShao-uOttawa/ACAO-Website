@@ -31,3 +31,14 @@ html {
   background-color: #ff8ba0;
   border-color: #ff8ba0;
 }
+
+.beige-button {
+  background-color: #ffdcd1;
+  border-color: #ffdcd1;
+  color: black;
+}
+
+.beige-button:hover {
+  background-color: #ffa8b5;
+  border-color: #ffa8b5;
+}

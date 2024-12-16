@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ContactsFooter from '../components/ContactsFooter.vue';
+
 
 </script>
 
@@ -6,6 +8,7 @@
     <NavBar/>
     <HomePage/>
     <EventsPage/>
+    <ContactsFooter/>
 </template>
 
 <style scoped>

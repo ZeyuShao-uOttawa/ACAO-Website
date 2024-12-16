@@ -9,6 +9,7 @@ const authService = new AuthService();
 const eventDetails = ref<Event>({
     eventTitle: '',
     eventDetails: '',
+    eventLocation: '',
     eventPrice: 0,
     eventImageUrl: '',
 });
@@ -22,6 +23,7 @@ onMounted(async () => {
         eventDetails.value = {
             eventTitle: event.eventTitle,
             eventDetails: event.eventDetails,
+            eventLocation: event.eventLocation,
             eventPrice: event.eventPrice,
             eventImageUrl: event.eventImageUrl
         };
@@ -52,23 +54,27 @@ const registerForEvent = () => {
                     <h1>Our Upcoming Event</h1>
                 </BCol>
                 <BCol md="6" class="d-flex align-items-center">
-                    <BButton v-if="checkUserRoleIsAdmin()" class="pink-button " @click="showModifyEventModal = true">Edit Event Details</BButton>
+                    <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="showModifyEventModal = true">Edit Event Details</BButton>
                 </BCol>
             </BRow>
-            <BRow class="d-flex">
-                <BCol md="7" class="d-flex justify-content-center align-items-center">
+            <BRow class="d-flex pb-5">
+                <BCol md="6" class="d-flex justify-content-center align-items-center">
                     <BImg
                     id="event-image" 
                     :src="eventDetails.eventImageUrl"
                     img-alt="Event Image"
                     />
                 </BCol>
-                <BCol md="5" class="mt-5 d-flex flex-column justify-content-center align-items-center">
+                <BCol md="2"></BCol>
+                <BCol md="4" class="mt-5 d-flex flex-column justify-content-center align-items-center">
                     <BRow class="">
                         <h3>{{ eventDetails.eventTitle }}</h3>
                     </BRow>
                     <BRow class="">
                         <p>{{ eventDetails.eventDetails }}</p>
+                    </BRow>
+                    <BRow class="">
+                        <p><b>Event Location: </b>{{ eventDetails.eventLocation }}</p>
                     </BRow>
                     <BRow class="">
                         <BButton class="pink-button" @click="registerForEvent()">Register Now</BButton>
@@ -89,7 +95,7 @@ const registerForEvent = () => {
 <style scoped>
 #events {
     background-color: #FFF4E9;
-    height: calc(100vh - 76px);
+    min-height: calc(100vh - 76px);
 }
 
 #event-image {

@@ -79,6 +79,19 @@ const updateEvent = async() => {
                                 ></BFormInput>
                             </BFormGroup>
                             <BFormGroup 
+                                id="location-label" 
+                                class="mb-2" 
+                                label="Event Location:" 
+                                label-for="location"
+                            >
+                                <BFormInput
+                                    id="location"
+                                    v-model="eventForm.eventLocation"
+                                    type="location"
+                                    placeholder="Enter Event Location"
+                                ></BFormInput>
+                            </BFormGroup>
+                            <BFormGroup 
                                 id="price-label" 
                                 class="mb-2" 
                                 label="Event Price:" 
