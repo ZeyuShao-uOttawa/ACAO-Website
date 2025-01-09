@@ -1,5 +1,6 @@
 # Asian Canadian Association uOttawa Web Application
-Wiki Page: https://acao-website.atlassian.net/l/cp/sTAms0w1
+Wiki Page: https://acao-website.atlassian.net/l/cp/sTAms0w1<br>
+Jira: https://acao-website.atlassian.net/jira/software/projects/KAN/boards/1
 
 ## Run Dev Environment
 To run the Dev environment first clone the repository into a folder of your liking:
