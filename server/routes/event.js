@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const Event = require('../models/Event');
 const verifyRole = require('../authentication/verifyRole');
 
