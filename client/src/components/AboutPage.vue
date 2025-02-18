@@ -23,15 +23,7 @@ const defaultExecDetails: ExecDetails = {
 
 const loadExecCards = async () => {
     try {
-        const execs = await teamService.getAllExecDetails();
-
-        execCards.value = execs.map(exec => ({
-            _id: exec._id || '',
-            image: exec.image || '',
-            name: exec.name || '',
-            position: exec.position || '',
-            description: exec.description || '',
-        }));
+        execCards.value = await teamService.getAllExecDetails();
     } catch (err) {
         console.log(err)
     }

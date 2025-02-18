@@ -4,6 +4,7 @@ const verifyRole = require('../authentication/verifyRole');
 
 const router = express.Router();
 
+// Endpoint to get all Exec details
 router.get('/details', async (req, res) => {
     try {
         const execs = await Exec.find();
@@ -15,6 +16,8 @@ router.get('/details', async (req, res) => {
     }
 });
 
+
+// Endpoint to update a specific Exec detail
 router.post('/update', verifyRole('admin'), async (req, res) => {
     const id = req.body._id;
     const updates = {
@@ -45,6 +48,7 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
     }
 });
 
+// Endpoint to delete a specific Exec detail
 router.delete('/:id/delete', verifyRole('admin'), async (req, res) => {
     const { id } = req.params;
 
