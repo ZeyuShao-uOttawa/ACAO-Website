@@ -46,7 +46,7 @@ const deleteExecDetails = async() => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeDeleteExecModal">Cancel</button>
-                        <button id="signInButton" type="button" class="btn btn-primary" @click="deleteExecDetails">Delete Exec</button>
+                        <button type="button" class="btn btn-primary" @click="deleteExecDetails">Delete Exec</button>
                     </div>
                 </div>
             </div>

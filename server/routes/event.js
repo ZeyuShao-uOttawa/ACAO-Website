@@ -4,6 +4,7 @@ const verifyRole = require('../authentication/verifyRole');
 
 const router = express.Router();
 
+// Endpoint to get the event details
 router.get('/details', async (req, res) => {
     try {
         const event = await Event.findOne();
@@ -15,6 +16,7 @@ router.get('/details', async (req, res) => {
     }
 });
 
+// Endpoint to update the event details
 router.post('/update', verifyRole('admin'), async (req, res) => {
     const updates = req.body;
 
