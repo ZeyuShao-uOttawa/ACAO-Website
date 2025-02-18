@@ -63,27 +63,27 @@ const deleteExecDetails = (index: number) => {
         <BContainer>
             <h1 class="pt-5 d-flex justify-content-center align-items-center">Meet Our Exec Team</h1>
             <BButton v-if="checkUserRoleIsAdmin()" class="beige-button" @click="addExecDetails">Add Exec</BButton>
-            <BCardGroup class="pt-5 pb-5" deck>
-                <BRow class="g-3">
-                    <BCol v-for="(card, index) in execCards" :key="index" cols="12" md="6" lg="4" xl="3">
+            <BCardGroup class="exec-card-group pt-5 pb-5">
+                <BRow class="gx-3 d-flex justify-content-center">
+                    <BCol v-for="(card, index) in execCards" :key="index" cols="12" md="6" lg="4" xl="3" class="mb-3">
                         <BCard :title="card.name" class="text-center exec-card">
-                            <BCardText>{{ card.description }}</BCardText>
+                            <BCardImg
+                                :src="card.image"
+                                alt="Exec Image"
+                                class="exec-img rounded-circle mx-auto d-block mb-1"
+                            />
                             <BCardText>{{ card.position }}</BCardText>
-                            <BRow>
-                                <BCol>
-                                    <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="editExecDetails(index)">Edit</BButton>
-                                </BCol>
-                                <BCol>
-                                    <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="deleteExecDetails(index)">Delete</BButton>
-                                </BCol>
-                            </BRow>
+                            <BCardText>{{ card.description }}</BCardText>
+                            <BCardFooter v-if="checkUserRoleIsAdmin()">
+                                <BButton class="pink-button exec-edit-margin" @click="editExecDetails(index)">Edit</BButton>
+                                <BButton class="pink-button" @click="deleteExecDetails(index)">Delete</BButton>
+                            </BCardFooter>
                         </BCard>
                     </BCol>
                 </BRow>
             </BCardGroup>
         </BContainer>
     </div>
-
     <UpdateExecModal
         v-if="showUpdateExecModal && checkUserRoleIsAdmin()"
         :execDetails="currentExecDetails!"
@@ -106,13 +106,25 @@ const deleteExecDetails = (index: number) => {
     background-color: #FFCCCB;
 }
 
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
+.exec-card-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .exec-card {
     background-color: #FFDCD1;
+}
+
+.exec-img {
+    width: 100px; 
+    height: 100px;
+    object-fit: cover;
+}
+
+.exec-edit-margin {
+    margin-right: 20px;
 }
 </style>

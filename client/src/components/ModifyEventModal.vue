@@ -18,7 +18,7 @@ const eventService = new EventService();
 let eventForm: Event = props.currentEventDetails;
 
 const closeModifyEventModal = () => {
-  emit('update:showModifyEventModal', false);
+    emit('update:showModifyEventModal', false);
 };
 
 const isUpdateEventButtonDisabled = computed(() => {
@@ -107,21 +107,20 @@ const updateEvent = async() => {
                             <BFormGroup 
                                 id="image-label" 
                                 class="mb-2" 
-                                label="Event Image URL: (Google Drive Share Image Link)" 
+                                label="Event Image:" 
                                 label-for="event-image"
                             >
-                                <BFormInput
-                                    id="event-image"
-                                    v-model="eventForm.eventImageUrl"
-                                    type="event-image"
-                                    placeholder="Enter Event Image URL"
-                                ></BFormInput>
+                                <ImageSelector @update:selectedImageURL="eventForm.eventImageUrl = $event"/>
+                                <div v-if="eventForm.eventImageUrl" class="preview mt-2">
+                                    <h5>Selected Image:</h5>
+                                    <img :src="eventForm.eventImageUrl" alt="Selected Image" />
+                                </div>
                             </BFormGroup>
                           </BForm>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeModifyEventModal">Cancel</button>
-                        <button id="signInButton" type="button" class="btn btn-primary" @click="updateEvent" :disabled="isUpdateEventButtonDisabled">Update Event</button>
+                        <button type="button" class="btn btn-primary" @click="updateEvent" :disabled="isUpdateEventButtonDisabled">Update Event</button>
                     </div>
                 </div>
             </div>
@@ -130,4 +129,11 @@ const updateEvent = async() => {
 </template>
 
 <style scoped>
+.preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 8px;
+}
 </style>

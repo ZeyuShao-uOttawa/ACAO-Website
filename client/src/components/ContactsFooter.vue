@@ -27,7 +27,7 @@ const onReset = (event: any) => {
         <BContainer class="footer-container">
             <BRow class="d-flex icons-container">
                 <BCol md="1"></BCol>
-                <BCol md="2" class="d-flex flex-column justify-content-center">
+                <BCol md="2" class="mt-2 d-flex flex-column justify-content-center">
                     <a class="mb-3" href="https://www.instagram.com/uottawaacao/" target="_blank">
                         <img src="../assets/instagram.png" alt="Instagram" class="icon" />
                         &nbsp&nbspInstagram

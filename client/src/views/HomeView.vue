@@ -7,7 +7,6 @@
     <EventsPage/>
     <AboutPage/>
     <ContactsFooter/>
-    <ImageSelector/>
 </template>
 
 <style scoped>

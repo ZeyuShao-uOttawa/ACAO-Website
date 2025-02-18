@@ -10,7 +10,7 @@ export interface Image {
 }
 
 export default class ImageService {
-    async uploadImage(selectedFile: File): Promise<boolean> {
+    async uploadImage(selectedFile: File): Promise<string> {
         const res = await api.get("/image/s3Url", {
             headers: { 'x-auth-token': authService.getToken() },
             params: {
@@ -31,8 +31,9 @@ export default class ImageService {
             },
         });
 
-        console.log("✅ File uploaded successfully!");
-        return true;
+        const s3ImageUrl = url.split("?")[0];
+
+        return s3ImageUrl;
     }
 
     async getAllImages(): Promise<Image[]> {

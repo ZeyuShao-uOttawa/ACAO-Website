@@ -91,21 +91,20 @@ const updateExecDetails = async() => {
                             <BFormGroup 
                                 id="image-label" 
                                 class="mb-2" 
-                                label="Exec Image URL: (Google Drive Share Image Link)" 
+                                label="Exec Image:" 
                                 label-for="exec-image"
                             >
-                                <BFormInput
-                                    id="exec-image"
-                                    v-model="execForm.image"
-                                    type="exec-image"
-                                    placeholder="Enter Exec Image URL"
-                                ></BFormInput>
+                                <ImageSelector @update:selectedImageURL="execForm.image = $event"/>
+                                <div v-if="execForm.image" class="preview mt-2">
+                                    <h5>Selected Image:</h5>
+                                    <img :src="execForm.image" alt="Selected Image" />
+                                </div>
                             </BFormGroup>
                           </BForm>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeAddExecModal">Cancel</button>
-                        <button id="signInButton" type="button" class="btn btn-primary" @click="updateExecDetails">Add/Update Exec</button>
+                        <button type="button" class="btn btn-primary" @click="updateExecDetails">Add/Update Exec</button>
                     </div>
                 </div>
             </div>
@@ -114,4 +113,11 @@ const updateExecDetails = async() => {
 </template>
 
 <style scoped>
+.preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 8px;
+}
 </style>
