@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Deployment to Heroku",
     "scripts": {
+        "start": "node server/server.js",
         "heroku-build": "npm run build --prefix client && rimraf server/public/* && cpx client/dist/**/* server/public",
         "dev": "concurrently \"npm run start:server --prefix ./server\" \"npm run start:client --prefix ./server\""
     },
