@@ -13,19 +13,19 @@ const authService = new AuthService();
 
 export default class TeamService {
     async getAllExecDetails(): Promise<ExecDetails[]> {
-        const res = await api.get('/exec/details');
+        const res = await api.get('/team/details');
 
         return res.data;
     }
 
     async updateExecDetails(execDetails: ExecDetails) {
-        await api.post('/exec/update', execDetails, {
+        await api.post('/team/update', execDetails, {
             headers: { 'x-auth-token': authService.getToken() },
         });
     }
 
     async deleteExecDetails(execId: string) {
-        await api.delete(`/exec/${execId}/delete`, {
+        await api.delete(`/team/${execId}`, {
             headers: { 'x-auth-token': authService.getToken() },
         });
     }
