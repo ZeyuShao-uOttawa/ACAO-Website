@@ -1,6 +1,6 @@
 import api from './api';
 import AuthService from './authService';
-import axios from "axios"; 
+import axios from 'axios'; 
 
 const authService = new AuthService();
 
@@ -11,7 +11,7 @@ export interface Image {
 
 export default class ImageService {
     async uploadImage(selectedFile: File): Promise<string> {
-        const res = await api.get("/image/s3Url", {
+        const res = await api.get('/image/s3Url', {
             headers: { 'x-auth-token': authService.getToken() },
             params: {
                 fileName: selectedFile.name,
@@ -22,22 +22,22 @@ export default class ImageService {
         const url = res.data.url;
 
         if (!url) {
-            throw new Error("Failed to obtain presigned URL.");
+            throw new Error('Failed to obtain presigned URL.');
         }
 
         await axios.put(url, selectedFile, {
             headers: {
-              "Content-Type": selectedFile.type,
+              'Content-Type': selectedFile.type,
             },
         });
 
-        const s3ImageUrl = url.split("?")[0];
+        const s3ImageUrl = url.split('?')[0];
 
         return s3ImageUrl;
     }
 
     async getAllImages(): Promise<Image[]> {
-        const res = await api.get("/image/list-images");
+        const res = await api.get('/image/list-images');
 
         return res.data;
     }

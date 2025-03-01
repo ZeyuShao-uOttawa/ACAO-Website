@@ -36,4 +36,4 @@ async function listS3Images() {
     })) || [];
 }
 
-module.exports = { generateUploadURL, listS3Images };
+module.exports = { generateUploadURL, listS3Images, s3Client };

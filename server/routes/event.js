@@ -18,9 +18,8 @@ router.get('/details', async (req, res) => {
 
 // Endpoint to update the event details
 router.post('/update', verifyRole('admin'), async (req, res) => {
-    const updates = req.body;
-
     try {
+        const updates = req.body;
         const updatedEvent = await Event.findOneAndUpdate(
             {},
             updates,
