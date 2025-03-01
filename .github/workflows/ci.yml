@@ -7,7 +7,7 @@ on:
       - development
 
 jobs:
-  client:
+  client_tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,4 +25,32 @@ jobs:
 
     - name: Run client tests
       working-directory: ./client
+      run: npm test
+
+  server_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code of server
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js for server
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install server dependencies
+      working-directory: ./server
+      run: npm install
+
+    - name: Create .env.test file
+      working-directory: ./server
+      run: |
+        echo "MONGO_URI=mongodb://localhost:27017/mytestdb" >> .env.test
+        echo "JWT_SECRET=test-secret" >> .env.test
+        echo "AWS_S3_BUCKET=test-bucket" >> .env.test
+        echo "AWS_REGION=us-east-1" >> .env.test
+
+    - name: Run server tests
+      working-directory: ./server
       run: npm test
