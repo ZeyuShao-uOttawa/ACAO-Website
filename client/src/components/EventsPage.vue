@@ -65,8 +65,8 @@ const registerForEvent = () => {
                     img-alt="Event Image"
                     />
                 </BCol>
-                <BCol md="2"></BCol>
-                <BCol md="4" class="mt-5 d-flex flex-column justify-content-center align-items-center">
+                <BCol md="2" class="mt-5"></BCol>
+                <BCol md="4" class="d-flex flex-column justify-content-center align-items-center">
                     <BRow class="">
                         <h3>{{ eventDetails.eventTitle }}</h3>
                     </BRow>
