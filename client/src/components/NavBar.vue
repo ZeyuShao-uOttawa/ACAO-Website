@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import AuthService from '../services/authService';
-import SignInModal from './SignInModal.vue';
 
 const authService = new AuthService();
 const showSignInModal = ref<boolean>(false);

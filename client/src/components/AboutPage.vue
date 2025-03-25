@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue';
 import AuthService from '../services/authService';
 import TeamService, { ExecDetails } from '../services/teamService';
-import DeleteExecModal from './ExecModals/DeleteExecModal.vue';
 
 const authService = new AuthService();
 const teamService = new TeamService();

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
-import SignInModal from '../../src/components/SignInModal.vue'
+import SignInModal from '../../src/components/modals/SignInModal.vue'
 
 describe('SignInModal.vue', () => {
   it('should renders the modal name', () => {
