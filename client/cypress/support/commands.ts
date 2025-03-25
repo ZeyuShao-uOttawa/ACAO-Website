@@ -35,3 +35,12 @@
 //     }
 //   }
 // }
+
+// UI Login command that will press the login button to open the login modal and enter the email and password and attempt to login
+Cypress.Commands.add('loginUI', (email: string, password: string) => {
+    cy.visit('/');
+    cy.get('#signIn').click();
+    cy.get('#email').type(email);
+    cy.get('#password').type(password);
+    cy.get('#signInButton').click();
+});
