@@ -11,11 +11,15 @@ Then cd into both the client and server folders install all the node modules by 
 
 `npm install`
 
-After installing all the node modules, create a .env file in the server directory with the following information:
+In both folders. After installing all the node modules, create a .env file in the server directory with the following information:
 
 `MONGODB_URI=<mongodb_url>` <br>
 `JWT_SECRET=<JWT_token>` <br>
 `PORT=3000` <br>
+`AWS_ACCESS_KEY_ID=<aws_access_key>` <br>
+`AWS_SECRET_ACCESS_KEY=<aws_secret_key>` <br> 
+`AWS_REGION=us-east-1` <br>
+`AWS_S3_BUCKET=acao-images` <br>
 
 Then create a .env file in the client directory with the following information:
 

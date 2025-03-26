@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import AuthService from '../services/authService';
-import SignInModal from './SignInModal.vue';
 
 const authService = new AuthService();
 const showSignInModal = ref<boolean>(false);
@@ -33,8 +32,8 @@ const scrollToSection = (sectionId: string):void => {
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#events" @click.prevent="scrollToSection('events')">Our Events</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#about" @click.prevent="scrollToSection('about')">Meet the Team</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
-                <BButton  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
-                <BButton  v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
+                <BButton id="signIn"  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
+                <BButton id="signOut" v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
             </BNavbarNav>
         </BCollapse>
     </BNavbar>
