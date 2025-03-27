@@ -4,16 +4,6 @@ import AuthService from '../services/authService';
 
 const authService = new AuthService();
 const showSignInModal = ref<boolean>(false);
-
-const scrollToSection = (sectionId: string):void => {
-    const element = document.getElementById(sectionId);
-    const offset = 76;
-    const top = element!.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({
-        top,
-        behavior: 'smooth'
-    });
-}
 </script>
 
 <template>
@@ -29,9 +19,9 @@ const scrollToSection = (sectionId: string):void => {
 
         <BCollapse id="navbar-toggle-collapse" is-nav>
             <BNavbarNav class="ms-auto mb-2 mb-lg-0 margin-right">
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#events" @click.prevent="scrollToSection('events')">Our Events</BNavItem>
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#about" @click.prevent="scrollToSection('about')">Meet the Team</BNavItem>
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/', hash: '#events' }">Our Events</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/', hash: '#about' }">Meet the Team</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="/gallery">Photo Gallery</BNavItem>
                 <BButton id="signIn"  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
                 <BButton id="signOut" v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
             </BNavbarNav>

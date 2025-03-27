@@ -24,7 +24,7 @@ const loadExecCards = async () => {
     try {
         execCards.value = await teamService.getAllExecDetails();
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
 }
 

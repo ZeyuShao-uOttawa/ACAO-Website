@@ -21,7 +21,7 @@ router.get('/s3Url', verifyRole('admin'), async (req, res) => {
 });
 
 // Endpoint to get all image URLs from S3
-router.get('/list-images', async (req, res) => {
+router.get('/listImages', async (req, res) => {
     try {
         const images = await listS3Images();
         res.status(200).json(images);
