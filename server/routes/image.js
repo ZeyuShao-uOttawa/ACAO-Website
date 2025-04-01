@@ -1,10 +1,10 @@
 const express = require('express');
-const { generateUploadURL, listS3Images } = require('../services/S3Service');
+const { generateUploadURL, listS3Images, deleteImage } = require('../services/S3Service');
 const verifyRole = require('../authentication/verifyRole');
 
 const router = express.Router();
 
-// Endpoint to get a presigned URL for image upload.
+// Endpoint to get a presigned URL for image upload
 router.get('/s3Url', verifyRole('admin'), async (req, res) => {
     try {
         const { fileName, fileType } = req.query;
@@ -21,12 +21,25 @@ router.get('/s3Url', verifyRole('admin'), async (req, res) => {
 });
 
 // Endpoint to get all image URLs from S3
-router.get('/list-images', async (req, res) => {
+router.get('/listImages', async (req, res) => {
     try {
         const images = await listS3Images();
         res.status(200).json(images);
     } catch (err) {
         res.status(500).json({ error: 'Failed to load images' });
+    }
+});
+
+// Endpoint to delete a specific image from S3
+router.delete('/deleteImage', verifyRole('admin'), async (req, res) => {
+    try {
+        const { key } = req.body;
+
+        const deleteResponse = await deleteImage(key);
+
+        res.status(200).json({ message: 'Successfully deleted image' });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete image' });
     }
 });
 

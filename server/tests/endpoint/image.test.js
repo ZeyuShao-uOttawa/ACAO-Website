@@ -96,9 +96,9 @@ describe('Image API Routes', () => {
         expect(response.body.message).toBe('Forbidden');
     });
 
-    test('GET /api/image/list-images should return a list of all image objects in the S3 bucket', async () => {
+    test('GET /api/image/listImages should return a list of all image objects in the S3 bucket', async () => {
         const response = await request(app)
-            .get('/api/image/list-images');
+            .get('/api/image/listImages');
 
         expect(response.status).toBe(200);
         expect(response.body).toEqual([
@@ -113,11 +113,11 @@ describe('Image API Routes', () => {
         ]);
     });
 
-    test('GET /api/image/list-images should return 500 if `listS3Images` throws an error', async () => {
+    test('GET /api/image/listImages should return 500 if `listS3Images` throws an error', async () => {
         listS3Images.mockRejectedValue(new Error('AWS S3 Error'));
 
         const response = await request(app)
-            .get('/api/image/list-images');
+            .get('/api/image/listImages');
 
         expect(response.status).toBe(500);
         expect(response.body.error).toBe('Failed to load images');

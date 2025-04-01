@@ -84,7 +84,7 @@ const confirmImageSelect = () => {
                         <div v-if="!upload && !select">
                             <BButton 
                                 variant="primary"
-                                class="btn mt-2 mb-2"    
+                                class="btn mt-2 mb-2 me-2"    
                                 @click="upload = true"
                             >
                                 Upload Image
@@ -121,9 +121,9 @@ const confirmImageSelect = () => {
                             </BButton>
                         </div>
                         <div v-if="select" class="image-grid">
-                            <div>
+                            <BContainer>
                                 <BButton @click="select = false; selectedImage = null">Back</BButton>
-                            </div>
+                            </BContainer>
                             <div
                                 v-for="image in images"
                                 :key="image.name"
@@ -133,9 +133,9 @@ const confirmImageSelect = () => {
                             >
                                 <img :src="image.url" :alt="image.name" />
                             </div>
-                            <div>
+                            <BContainer>
                                 <BButton variant="primary" @click="confirmImageSelect">Select Image</BButton>
-                            </div>
+                            </BContainer>
                         </div>
                     </div>
                 </div>

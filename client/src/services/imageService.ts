@@ -2,12 +2,12 @@ import api from './api';
 import AuthService from './authService';
 import axios from 'axios'; 
 
-const authService = new AuthService();
-
 export interface Image { 
     url: string; 
     name: string
 }
+
+const authService = new AuthService();
 
 export default class ImageService {
     async uploadImage(selectedFile: File): Promise<string> {
@@ -37,8 +37,15 @@ export default class ImageService {
     }
 
     async getAllImages(): Promise<Image[]> {
-        const res = await api.get('/image/list-images');
+        const res = await api.get('/image/listImages');
 
         return res.data;
+    }
+
+    async deleteImage(key: string) {
+        await api.delete(`/image/deleteImage`, {
+            headers: { 'x-auth-token': authService.getToken() },
+            data: { key },
+        });
     }
 }

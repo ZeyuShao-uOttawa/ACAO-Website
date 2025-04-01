@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>();
 
 const closeAddExecModal = () => {
-  emit('update:showUpdateExecModal', false);
+    emit('update:showUpdateExecModal', false);
 };
 
 let execForm = reactive<ExecDetails>(props.execDetails);
