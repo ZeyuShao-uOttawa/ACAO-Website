@@ -8,10 +8,10 @@ const showSignInModal = ref<boolean>(false);
 
 <template>
     <BNavbar class="font-lexand sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
-        <BNavbarBrand class="margin-left hover-text-pink" href="#">
+        <BNavbarBrand class="margin-left hover-text-pink">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
-                <span class="fs-6">Asian Canadians<br>Association uOttawa</span>
+                <BNavItem class="d-flex fs-6" :to="{ path: '/' }">Asian Canadians<br>Association uOttawa</BNavItem>
             </div>
         </BNavbarBrand>
 
@@ -21,7 +21,7 @@ const showSignInModal = ref<boolean>(false);
             <BNavbarNav class="ms-auto mb-2 mb-lg-0 margin-right">
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/', hash: '#events' }">Our Events</BNavItem>
                 <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/', hash: '#about' }">Meet the Team</BNavItem>
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="/gallery">Photo Gallery</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/gallery' }">Photo Gallery</BNavItem>
                 <BButton id="signIn"  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
                 <BButton id="signOut" v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
             </BNavbarNav>

@@ -2,7 +2,7 @@
 Wiki Page: https://acao-website.atlassian.net/l/cp/sTAms0w1<br>
 Jira: https://acao-website.atlassian.net/jira/software/projects/KAN/boards/1
 
-## Run Dev Environment
+## Running the Dev Environment
 To run the Dev environment first clone the repository into a folder of your liking:
 
 `git clone https://github.com/ZeyuShao-uOttawa/ACAO-Website`
@@ -19,7 +19,7 @@ In both folders. After installing all the node modules, create a .env file in th
 `AWS_ACCESS_KEY_ID=<aws_access_key>` <br>
 `AWS_SECRET_ACCESS_KEY=<aws_secret_key>` <br> 
 `AWS_REGION=us-east-1` <br>
-`AWS_S3_BUCKET=acao-images` <br>
+`AWS_S3_BUCKET=<aws_bucket>` <br>
 
 Then create a .env file in the client directory with the following information:
 
@@ -29,4 +29,14 @@ After cd into the server folder and run either:
 
 `npm run start:server` to start the server only<br>
 `npm run start:client` to start the client only<br>
-`npm run dev` to run both the server and client concurrently<br>
+`npm run dev` to run both the server and client concurrently
+
+### Creating Dev Admin Account
+After you have set up the dev environment, to create a admin account for the website, you must cd into the server directory and run:
+
+`node createAdmin.js`
+
+Which will create a admin account with the following credentials:
+
+`email: admin@admin.com`<br>
+`password: admin`

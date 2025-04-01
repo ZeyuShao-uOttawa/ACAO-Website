@@ -1,6 +1,6 @@
 const express = require('express');
 const Album = require('../models/Album');
-const { generateAlbumUploadURL, listS3AlbumImages } = require('../services/S3Service');
+const { generateAlbumUploadURL, listS3AlbumImages, deleteAlbum } = require('../services/S3Service');
 const verifyRole = require('../authentication/verifyRole');
 
 const router = express.Router();
@@ -55,6 +55,7 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
             coverImageUrl: req.body.coverImageUrl,
         }
 
+        // If an ID is passed in, update the Album details, otherwise create a new Album
         if (id != "") {
             const updatedAlbum = await Album.findByIdAndUpdate(
                 id,
@@ -76,15 +77,19 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
 });
 
 // Endpoint to delete a specific Album
-router.delete('/album/:id', verifyRole('admin'), async (req, res) => {
+router.delete('/:id', verifyRole('admin'), async (req, res) => {
     try {
         const { id } = req.params;
-
+        
+        // Delete the Album from the DB
         const album = await Album.findByIdAndDelete(id);
         if (!album) return res.status(404).json({ error: 'Album not found' });
+        // Delete the images associated with the Album in the S3 bucket
+        const s3DeleteResponse = await deleteAlbum(id);
 
         res.status(200).json({ message: 'Successfully deleted album' });
     } catch (err) {
+        console.log(err)
         res.status(500).json({ error: 'An error occurred while deleting the album' });
     }
 });

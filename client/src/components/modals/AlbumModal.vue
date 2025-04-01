@@ -16,6 +16,9 @@ const images = ref<Image[]>([]);
 const selectedFile = ref<File | null>(null);
 const isUploading = ref<boolean>(false);
 const selectedImage = ref<string | null>(null);
+const showDeleteImageModal = ref<boolean>(false);
+const imageKeyToDelete = ref<string>();
+const imageUrlToDelete = ref<string>();
 
 const checkUserRoleIsAdmin = (): boolean => {
     const userRole = authService.getUserRole();
@@ -47,12 +50,19 @@ const uploadFile = async () => {
 
     try {
         selectedImage.value = await galleryService.uploadImageToAlbum(props.album._id, selectedFile.value);
+        fetchImages(props.album._id);
     } catch (error) {
         console.error("Upload failed");
     } finally {
         isUploading.value = false;
     }
 };
+
+const deleteImage = (key: string, url:string) => {
+    imageKeyToDelete.value = key;
+    imageUrlToDelete.value = url;
+    showDeleteImageModal.value = true;
+}
 
 watch(
     () => props.album,
@@ -68,9 +78,8 @@ watch(
         <BContainer>
             <button class="close-btn" @click="$emit('close')">X</button>
             <h2 class="pt-5 d-flex justify-content-center align-items-center">{{ album.title }}</h2>
-            <!-- <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="addImageToAlbum">Add Album</BButton> -->
             <div v-if="checkUserRoleIsAdmin()">
-                <BFormGroup label="Choose an image to upload:" label-for="file-input">
+                <BFormGroup label="Choose an image to upload to the album:" label-for="file-input">
                     <BFormFile
                         id="file-input"
                         v-model="selectedFile"
@@ -90,15 +99,25 @@ watch(
                 </BButton>
             </div>
             <div class="image-grid">
-                <img
-                    v-for="image in images"
+                <div v-for="image in images">
+                    <img
                     :key="image.name"
                     :src="image.url"
-                    alt="album image"
+                    alt="Album Image"
                 />
+                <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="deleteImage(image.name, image.url)">Delete Image</BButton>
+                </div>
             </div>
         </BContainer>
     </div>
+    <DeleteImageModal
+        v-if="showDeleteImageModal"
+        :imageKey="imageKeyToDelete"
+        :imageUrl="imageUrlToDelete"
+        :showDeleteImageModal="showDeleteImageModal"
+        @update:showDeleteImageModal="showDeleteImageModal = $event"
+        @update:reload="fetchImages(album._id)"
+    />
 </template>
 
 <style scoped>

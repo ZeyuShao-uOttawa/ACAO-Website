@@ -41,4 +41,11 @@ export default class ImageService {
 
         return res.data;
     }
+
+    async deleteImage(key: string) {
+        await api.delete(`/image/deleteImage`, {
+            headers: { 'x-auth-token': authService.getToken() },
+            data: { key },
+        });
+    }
 }

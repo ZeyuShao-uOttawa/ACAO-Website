@@ -66,14 +66,14 @@ onMounted(async () => {
     <div id="gallery" class="font-lexand">
         <BContainer>
             <h1 class="pt-5 d-flex justify-content-center align-items-center">Event Photo Gallery</h1>
-            <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="addAlbum">Add Images to Album</BButton>
+            <BButton v-if="checkUserRoleIsAdmin()" class="pink-button" @click="addAlbum">Add Album</BButton>
             <BRow class="d-flex justify-content-center pt-5 pb-5">
                 <BCol v-for="(album, index) in albumCards" :key="index" cols="12" md="6" class="d-flex mb-4">
                     <BCard :title="album.title" class="text-center">
                         <BCardImg
                             :src="album.coverImageUrl"
                             alt="Album Cover Image"
-                            class="mx-auto d-block mt-3 mb-3"
+                            class="album-img mx-auto d-block mt-3 mb-3"
                             @click="openAlbum(album)"
                         />
                         <BCardText>{{ album.description }}</BCardText>
@@ -91,6 +91,13 @@ onMounted(async () => {
         :album="albumToOpen"
         @close="albumToOpen = null"
     />
+    <DeleteAlbumModal
+        v-if="showDeleteAlbumModal && checkUserRoleIsAdmin()"
+        :albumId="currentAlbumId!"
+        :showDeleteAlbumModal="showDeleteAlbumModal" 
+        @update:showDeleteAlbumModal="showDeleteAlbumModal = $event"
+        @update:reload="loadAlbumCards()"
+    />
     <UpdateAlbumModal
         v-if="showUpdateAlbumModal && checkUserRoleIsAdmin()"
         :album="currentAlbum!"
@@ -104,5 +111,9 @@ onMounted(async () => {
 #gallery {
     background-color: #FFF4E9;
     min-height: calc(100vh - 76px);
+}
+
+.album-img {
+    cursor: pointer;
 }
 </style>
