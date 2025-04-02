@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import EventService, { Event } from '../services/eventService';
+import EventService, { Event } from '../../services/eventService';
 
 interface SignInModalProps {
     showModifyEventModal: boolean;
@@ -20,10 +19,6 @@ let eventForm: Event = props.currentEventDetails;
 const closeModifyEventModal = () => {
     emit('update:showModifyEventModal', false);
 };
-
-const isUpdateEventButtonDisabled = computed(() => {
-    return false;
-})
 
 const updateEvent = async() => {
     try {
@@ -71,15 +66,15 @@ const updateEvent = async() => {
                                 label="Event Details:" 
                                 label-for="detail"
                             >
-                                <BFormInput
+                                <BFormTextarea
                                     id="detail"
                                     v-model="eventForm.eventDetails"
                                     type="detail"
                                     placeholder="Enter Event Details"
-                                ></BFormInput>
+                                ></BFormTextarea>
                             </BFormGroup>
                             <BFormGroup 
-                                id="location-label" 
+                                id="location-label"
                                 class="mb-2" 
                                 label="Event Location:" 
                                 label-for="location"
@@ -120,7 +115,7 @@ const updateEvent = async() => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeModifyEventModal">Cancel</button>
-                        <button type="button" class="btn btn-primary" @click="updateEvent" :disabled="isUpdateEventButtonDisabled">Update Event</button>
+                        <button type="button" class="btn btn-primary" @click="updateEvent">Update Event</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AuthService from '../services/authService';
+import AuthService from '../../services/authService';
 
 interface SignInModalProps {
     showSignInModal: boolean;

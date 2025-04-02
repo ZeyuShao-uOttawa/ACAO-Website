@@ -1,28 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import AuthService from '../services/authService';
-import SignInModal from './SignInModal.vue';
 
 const authService = new AuthService();
 const showSignInModal = ref<boolean>(false);
-
-const scrollToSection = (sectionId: string):void => {
-    const element = document.getElementById(sectionId);
-    const offset = 76;
-    const top = element!.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({
-        top,
-        behavior: 'smooth'
-    });
-}
 </script>
 
 <template>
     <BNavbar class="font-lexand sticky-top" v-b-color-mode="'light'" toggleable="lg" variant="white">
-        <BNavbarBrand class="margin-left hover-text-pink" href="#">
+        <BNavbarBrand class="margin-left hover-text-pink">
             <div class="d-flex align-items-center">
                 <img class="logo" src="../assets/logo.png" alt="ACAO Logo">
-                <span class="fs-6">Asian Canadians<br>Association uOttawa</span>
+                <BNavItem class="d-flex fs-6" :to="{ path: '/' }">Asian Canadians<br>Association uOttawa</BNavItem>
             </div>
         </BNavbarBrand>
 
@@ -30,11 +19,11 @@ const scrollToSection = (sectionId: string):void => {
 
         <BCollapse id="navbar-toggle-collapse" is-nav>
             <BNavbarNav class="ms-auto mb-2 mb-lg-0 margin-right">
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#events" @click.prevent="scrollToSection('events')">Our Events</BNavItem>
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="#about" @click.prevent="scrollToSection('about')">Meet the Team</BNavItem>
-                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" href="">Photo Gallery</BNavItem>
-                <BButton  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
-                <BButton  v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/', hash: '#events' }">Our Events</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/', hash: '#about' }">Meet the Team</BNavItem>
+                <BNavItem class="d-flex align-items-center justify-content-center fs-5 margin-left" :to="{ path: '/gallery' }">Photo Gallery</BNavItem>
+                <BButton id="signIn"  v-if="!authService.isAuthenticated()" class="margin-left pink-button" @click="showSignInModal = true">Sign In</BButton>
+                <BButton id="signOut" v-else class="margin-left pink-button" @click="authService.logout()">Sign Out</BButton>
             </BNavbarNav>
         </BCollapse>
     </BNavbar>

@@ -19,15 +19,15 @@ router.get('/details', async (req, res) => {
 
 // Endpoint to update a specific Exec detail
 router.post('/update', verifyRole('admin'), async (req, res) => {
-    const id = req.body._id;
-    const updates = {
-        name: req.body.name,
-        position: req.body.position,
-        description: req.body.description,
-        image: req.body.image,
-    }
-
     try {
+        const id = req.body._id;
+        const updates = {
+            name: req.body.name,
+            position: req.body.position,
+            description: req.body.description,
+            image: req.body.image,
+        }
+
         if (id != "") {
             const updatedExec = await Exec.findByIdAndUpdate(
                 id,
@@ -41,7 +41,7 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
             const exec = new Exec(updates);
             await exec.save();
         }
-        
+
         res.status(200).json({ message: 'Successfully updated exec details' });
     } catch (err) {
         res.status(500).json({ error: 'An error occurred while updating the exec details' });
@@ -49,12 +49,13 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
 });
 
 // Endpoint to delete a specific Exec detail
-router.delete('/:id/delete', verifyRole('admin'), async (req, res) => {
+router.delete('/:id', verifyRole('admin'), async (req, res) => {
     const { id } = req.params;
 
     try {
         const exec = await Exec.findByIdAndDelete(id);
-        
+        if (!exec) return res.status(404).json({ error: 'Exec details not found' });
+
         res.status(200).json({ message: 'Successfully deleted exec details' });
     } catch (err) {
         res.status(500).json({ error: 'An error occurred while deleting the exec details' });

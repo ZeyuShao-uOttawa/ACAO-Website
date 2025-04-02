@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import TeamService from '../../services/teamService';
 
-interface AddExecModalProps {
+interface DeleteExecModalProps {
     execId: string;
     showDeleteExecModal: boolean;
 }
-const props = defineProps<AddExecModalProps>();
+const props = defineProps<DeleteExecModalProps>();
 
 const emit = defineEmits<{
     (event: 'update:showDeleteExecModal', value: boolean): void,
@@ -46,7 +46,7 @@ const deleteExecDetails = async() => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeDeleteExecModal">Cancel</button>
-                        <button type="button" class="btn btn-primary" @click="deleteExecDetails">Delete Exec</button>
+                        <button type="button" class="btn btn-danger" @click="deleteExecDetails">Delete Exec</button>
                     </div>
                 </div>
             </div>

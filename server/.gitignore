@@ -13,6 +13,7 @@ pnpm-debug.log*
 
 # Environment files (include sensitive data like API keys)
 /.env
+/.env.test
 
 # Build and distribution directories
 /dist
@@ -35,5 +36,3 @@ Thumbs.db
 # VS Code settings
 .vscode/
 *.code-workspace
-
-createAdmin.js
