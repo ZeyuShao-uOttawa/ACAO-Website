@@ -44,19 +44,24 @@ async function generateAlbumUploadURL(albumId ,fileName, contentType) {
 }
 
 // Listing all the images in the base S3 bucket
-async function listS3Images() {
+async function listS3Images(continuationToken = null, limit = 20) {
     const command = new ListObjectsV2Command({
         Bucket: bucketName,
         Delimiter: '/',
+        MaxKeys: limit,
+        ContinuationToken: continuationToken || undefined,
     });
 
     const response = await s3Client.send(command);
 
     // Mapping the image key to the full URL to allow for displaying image
-    return response.Contents?.map((file) => ({
-        url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${file.Key}`,
-        name: file.Key,
-    })) || [];
+    return {
+        images: response.Contents?.map((file) => ({
+            url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${file.Key}`,
+            name: file.Key,
+        })) || [],
+        nextToken: response.IsTruncated ? response.NextContinuationToken : null,
+    };
 }
 
 // Listing all the images within a specific folder in the S3 bucket

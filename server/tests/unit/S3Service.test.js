@@ -22,19 +22,23 @@ describe('S3Service', () => {
                 { Key: 'image2.png' },
             ],
         });
+        const expectedRes = {
+            images: [
+                {
+                    url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/image1.jpg`,
+                    name: 'image1.jpg',
+                },
+                {
+                    url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/image2.png`,
+                    name: 'image2.png',
+                },
+            ],
+            nextToken: null,
+        }
 
         const images = await listS3Images();
 
-        expect(images).toEqual([
-            {
-                url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/image1.jpg`,
-                name: 'image1.jpg',
-            },
-            {
-                url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/image2.png`,
-                name: 'image2.png',
-            },
-        ]);
+        expect(images).toEqual(expectedRes);
         expect(s3Client.send).toHaveBeenCalledWith(expect.any(ListObjectsV2Command));
     });
 
@@ -43,9 +47,13 @@ describe('S3Service', () => {
             $metadata: { httpStatusCode: 200 },
             Contents: null,
         });
+        const expectedRes = {
+            images: [],
+            nextToken: null,
+        }
 
         const images = await listS3Images();
 
-        expect(images).toEqual([]);
+        expect(images).toEqual(expectedRes);
     });
 });
