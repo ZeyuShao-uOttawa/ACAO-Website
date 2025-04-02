@@ -36,8 +36,13 @@ export default class ImageService {
         return s3ImageUrl;
     }
 
-    async getAllImages(): Promise<Image[]> {
-        const res = await api.get('/image/listImages');
+    async getAllImages(token: string|null = null, limit: number = 20): Promise<{images: Image[], nextToken: string|null}> {
+        const res = await api.get('/image/listImages',{
+            params: {
+                token: token,
+                limit: limit,
+            }
+        });
 
         return res.data;
     }

@@ -23,8 +23,10 @@ router.get('/s3Url', verifyRole('admin'), async (req, res) => {
 // Endpoint to get all image URLs from S3
 router.get('/listImages', async (req, res) => {
     try {
-        const images = await listS3Images();
-        res.status(200).json(images);
+        const { token, limit } = req.query;
+
+        const result = await listS3Images(token, limit);
+        res.status(200).json(result);
     } catch (err) {
         res.status(500).json({ error: 'Failed to load images' });
     }

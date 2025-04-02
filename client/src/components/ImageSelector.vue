@@ -16,6 +16,9 @@ const images = ref<Image[]>([]);
 const selectedImage = ref<string | null>(null);
 const upload = ref<boolean>(false);
 const select = ref<boolean>(false);
+const additionalImages = ref<boolean>(true);
+let nextToken: string|null = null;
+
 
 const handleFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -26,7 +29,17 @@ const handleFileChange = (event: Event) => {
 
 const fetchImages = async () => {
     try {
-        images.value = await imageService.getAllImages();
+        const res = await imageService.getAllImages(nextToken, 10);
+
+        images.value.push(...res.images);
+
+        if (res.nextToken) {
+            nextToken = res.nextToken;
+        } else {
+            nextToken = null;
+            additionalImages.value = false;
+        }
+
     } catch (err) {
         console.error("Error loading images");
     }
@@ -57,10 +70,21 @@ const selectImage = (imageUrl: string) => {
 const confirmImageSelect = () => {
     if (selectedImage.value) {
         emit('update:selectedImageURL', selectedImage.value);
+        resetImageSelector();
         showImageSelector.value = false;
     } else {
         alert("No image selected!");
     }
+}
+
+const resetImageSelector = () => {
+    nextToken = null;
+    additionalImages.value = true;
+    images.value = [];
+    upload.value = false;
+    select.value = false;
+    selectedFile.value = null;
+    selectedImage.value = null;
 }
 </script>
 
@@ -78,7 +102,7 @@ const confirmImageSelect = () => {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Image Selector</h5>
-                        <button type="button" class="btn-close" aria-label="Close" @click="showImageSelector = false"></button>
+                        <button type="button" class="btn-close" aria-label="Close" @click="showImageSelector = false; resetImageSelector()"></button>
                     </div>
                     <div class="modal-body">
                         <div v-if="!upload && !select">
@@ -120,22 +144,27 @@ const confirmImageSelect = () => {
                                 {{ isUploading ? "Uploading..." : "Upload" }}
                             </BButton>
                         </div>
-                        <div v-if="select" class="image-grid">
-                            <BContainer>
-                                <BButton @click="select = false; selectedImage = null">Back</BButton>
-                            </BContainer>
-                            <div
+                        <div v-if="select" class="select-container">
+                            <div>
+                                <BButton @click="select = false; selectedImage = null;">Back</BButton>
+                            </div>
+                            <div class="image-grid mt-3 mb-3">
+                                <div
                                 v-for="image in images"
                                 :key="image.name"
                                 class="image-item"
                                 :class="{ 'selected': selectedImage === image.url }"
                                 @click="selectImage(image.url)"
-                            >
-                                <img :src="image.url" :alt="image.name" />
+                                >
+                                    <img :src="image.url" :alt="image.name"/>
+                                </div>
                             </div>
-                            <BContainer>
+                            <div>
+                                <BButton v-if="additionalImages" class="mb-3" @click="fetchImages">Load More Images</BButton>
+                            </div>
+                            <div>
                                 <BButton variant="primary" @click="confirmImageSelect">Select Image</BButton>
-                            </BContainer>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -161,8 +190,8 @@ const confirmImageSelect = () => {
 }
 
 .image-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 10px;
 }
 
@@ -171,7 +200,6 @@ const confirmImageSelect = () => {
     height: 100px;
     overflow: hidden;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
     border: 2px solid transparent;
     border-radius: 8px;
 }
@@ -183,7 +211,6 @@ const confirmImageSelect = () => {
 }
 
 .image-item.selected {
-    border: 3px solid #007bff;
-    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    outline: 2px solid #007bff;
 }
 </style>
