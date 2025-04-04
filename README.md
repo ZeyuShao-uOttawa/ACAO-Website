@@ -44,7 +44,14 @@ Which will create a admin account in your test db with the following credentials
 ## Running Tests
 
 ### Back-end Tests
-To run back-end unit/endpoint tests, cd into the `server` directory and run:
+To run back-end unit/endpoint tests, cd into the `server` directory and create a .env.test with the following information:
+
+`JWT_SECRET=test-secret` <br>
+`PORT=3000` <br>
+`AWS_REGION=us-east-1` <br>
+`AWS_S3_BUCKET=test-bucket` <br>
+
+After creating the .env.test, run:
 
 `npm run test` or<br>
 `npm run test-coverage` for a test coverage report
