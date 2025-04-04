@@ -12,12 +12,14 @@ const emit = defineEmits<{
     (event: 'update:reload', value: boolean): void
 }>();
 
+// Close Modal
 const closeDeleteAlbumModal = () => {
   emit('update:showDeleteAlbumModal', false);
 };
 
 const galleryService = new GalleryService();
 
+// Delete album and close modal and reload
 const deleteAlbumDetails = async() => {
     try {
         await galleryService.deleteAlbum(props.albumId);

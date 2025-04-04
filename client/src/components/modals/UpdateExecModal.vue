@@ -13,6 +13,7 @@ const emit = defineEmits<{
     (event: 'update:reload', value: boolean): void
 }>();
 
+// Close Modal
 const closeAddExecModal = () => {
     emit('update:showUpdateExecModal', false);
 };
@@ -21,6 +22,7 @@ let execForm = reactive<ExecDetails>(props.execDetails);
 
 const teamService = new TeamService();
 
+// Update/Add Exec information and close modal and reload the page
 const updateExecDetails = async() => {
     try {
         await teamService.updateExecDetails(execForm);

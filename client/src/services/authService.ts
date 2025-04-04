@@ -5,7 +5,9 @@ interface User {
     password: string;
 }
 
+// Service for login and user authentication
 export default class AuthService {
+    // Authenticating user
     async login(user: User) {
         const response = await api.post('/auth/login', user);
         const { token } = response.data;
@@ -16,6 +18,7 @@ export default class AuthService {
         window.location.reload();
     }
 
+    // Clearing local storage of authentication
     logout(): void {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userRole');

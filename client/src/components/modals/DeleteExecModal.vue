@@ -12,12 +12,14 @@ const emit = defineEmits<{
     (event: 'update:reload', value: boolean): void
 }>();
 
+// Close Modal
 const closeDeleteExecModal = () => {
   emit('update:showDeleteExecModal', false);
 };
 
 const teamService = new TeamService();
 
+// Delete exec and close modal and reload
 const deleteExecDetails = async() => {
     try {
         await teamService.deleteExecDetails(props.execId);

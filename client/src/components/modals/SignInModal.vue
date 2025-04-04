@@ -22,23 +22,28 @@ let signInForm: { email: string; password: string } = {
 let emailState = ref<boolean|null>(null);
 let passwordState = ref<boolean|null>(null);
 
+// Close Modal
 const closeSignInModal = () => {
   emit('update:showSignInModal', false);
 };
 
+// Making sure email format is correct
 const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     emailState.value = emailRegex.test(signInForm.email);
 };
 
+// Making sure a password is entered
 const validatePassword = () => {
     passwordState.value = signInForm.password.length > 0;
 };
 
+// Disables sign in button until input fields are correct
 const isSignInButtonDisabled = computed(() => {
     return !(emailState.value == true && passwordState.value == true);
 })
 
+// Sign in user and close modal
 const onSignIn = async() => {
     try {
         await authService.login(signInForm);

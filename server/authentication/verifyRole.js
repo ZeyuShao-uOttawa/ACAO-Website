@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// Middleware to verify the user role matches the intended role
 const verifyRole = (requiredRole) => {
     return (req, res, next) => {
         const token = req.headers['x-auth-token'];

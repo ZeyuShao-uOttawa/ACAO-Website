@@ -15,6 +15,7 @@ router.post('/login', async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return res.status(401).json({ error: 'Invalid credentials' });
 
+        // Create jwt with user id and role
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({ token, user: { id: user._id, email: user.email, role: user.role } });
     } catch (err) {
@@ -28,6 +29,7 @@ router.get('/verify', (req, res) => {
     if (!token) return res.status(401).json({ error: 'No token provided' });
 
     try {
+        // Verifying credentials
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         res.status(200).json({ message: 'Successfully validated token' });
     } catch (err) {
