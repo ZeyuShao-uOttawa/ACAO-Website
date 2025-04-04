@@ -21,6 +21,7 @@ const defaultAlbum: Album = {
     coverImageUrl: '',
 }
 
+// Checking to see if user is an admin
 const checkUserRoleIsAdmin = (): boolean => {
     const userRole = authService.getUserRole();
 
@@ -30,25 +31,30 @@ const checkUserRoleIsAdmin = (): boolean => {
     return false;
 }
 
+// Opening add album modal
 const addAlbum = () => {
     currentAlbum.value = JSON.parse(JSON.stringify(defaultAlbum)); // Deep copying detault album values
     showUpdateAlbumModal.value = true;
 }
 
+// Opening edit album modal
 const editAlbumDetails = (index: number) => {
     currentAlbum.value = albumCards.value[index];
     showUpdateAlbumModal.value = true;
 }
 
+// Opening delete album modal
 const deleteAlbumDetails = (index: number) => {
     currentAlbumId.value = albumCards.value[index]._id;
     showDeleteAlbumModal.value = true;
 }
 
+// Opening album modal
 const openAlbum = (album: Album) => {
     albumToOpen.value = album;
 }
 
+// Loading all albums
 const loadAlbumCards = async () => {
     try {
         albumCards.value = await galleryService.getAllAlbums();

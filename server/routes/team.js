@@ -28,6 +28,7 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
             image: req.body.image,
         }
 
+        // If an ID was passed try to update, otherwise create a new Exec based on the given information
         if (id != "") {
             const updatedExec = await Exec.findByIdAndUpdate(
                 id,

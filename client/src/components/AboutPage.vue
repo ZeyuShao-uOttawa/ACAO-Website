@@ -20,6 +20,7 @@ const defaultExecDetails: ExecDetails = {
     description: '',
 }
 
+// Load all Exec information
 const loadExecCards = async () => {
     try {
         execCards.value = await teamService.getAllExecDetails();
@@ -41,16 +42,19 @@ const checkUserRoleIsAdmin = (): boolean => {
     return false;
 }
 
+// Opens add Exec modal
 const addExecDetails = () => {
     currentExecDetails.value = JSON.parse(JSON.stringify(defaultExecDetails)); // Deep copying detault exec values
     showUpdateExecModal.value = true;
 }
 
+// Opens edit Exec modal
 const editExecDetails = (index: number) => {
     currentExecDetails.value = execCards.value[index];
     showUpdateExecModal.value = true;
 }
 
+// Opens delete Exec modal
 const deleteExecDetails = (index: number) => {
     currentExecId.value = execCards.value[index]._id;
     showDeleteExecModal.value = true;

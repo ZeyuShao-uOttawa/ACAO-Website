@@ -11,6 +11,7 @@ export interface Event {
 
 const authService = new AuthService();
 
+// Service for the EventsPage
 export default class EventService {
     async getEventDetails(): Promise<Event> {
         const res = await api.get('/event/details');

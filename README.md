@@ -36,7 +36,38 @@ After you have set up the dev environment, to create a admin account for the web
 
 `node createAdmin.js`
 
-Which will create a admin account with the following credentials:
+Which will create a admin account in your test db with the following credentials:
 
 `email: admin@admin.com`<br>
 `password: admin`
+
+## Running Tests
+
+### Back-end Tests
+To run back-end unit/endpoint tests, cd into the `server` directory and create a .env.test with the following information:
+
+`JWT_SECRET=test-secret` <br>
+`PORT=3000` <br>
+`AWS_REGION=us-east-1` <br>
+`AWS_S3_BUCKET=test-bucket` <br>
+
+After creating the .env.test, run:
+
+`npm run test` or<br>
+`npm run test-coverage` for a test coverage report
+
+### Front-end Tests
+To run front-end unit tests, cd into the `client` directory and run:
+
+`npm run test` or<br>
+`npm run test:coverage` for a test coverage report
+
+To run front-end end to end tests first go into the root directory and run:
+
+`npm run dev`
+
+Next open another cmd and go into the `client` directory and run:
+
+`npm run cy:open`
+
+And follow the instructions in the GUI to run the tests

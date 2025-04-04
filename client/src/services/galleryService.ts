@@ -12,6 +12,7 @@ export interface Album {
 
 const authService = new AuthService();
 
+// Service for the PhotoGallery
 export default class GalleryService {
     async getAllAlbums(): Promise<Album[]> {
         const res = await api.get('/gallery/albums');
@@ -41,12 +42,14 @@ export default class GalleryService {
             throw new Error('Failed to obtain presigned URL.');
         }
 
+        // Uploading file to AWS S3
         await axios.put(url, selectedFile, {
             headers: {
               'Content-Type': selectedFile.type,
             },
         });
 
+        // Removing the presigned part of the URL to return
         const s3ImageUrl = url.split('?')[0];
 
         return s3ImageUrl;

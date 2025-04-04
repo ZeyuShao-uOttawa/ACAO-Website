@@ -11,6 +11,7 @@ export interface ExecDetails {
 
 const authService = new AuthService();
 
+// Service for the AboutPage
 export default class TeamService {
     async getAllExecDetails(): Promise<ExecDetails[]> {
         const res = await api.get('/team/details');

@@ -9,6 +9,7 @@ export interface Image {
 
 const authService = new AuthService();
 
+// Service for storing, retrieving and deleting image files
 export default class ImageService {
     async uploadImage(selectedFile: File): Promise<string> {
         const res = await api.get('/image/s3Url', {
@@ -25,12 +26,14 @@ export default class ImageService {
             throw new Error('Failed to obtain presigned URL.');
         }
 
+        // Uploading file to AWS S3
         await axios.put(url, selectedFile, {
             headers: {
               'Content-Type': selectedFile.type,
             },
         });
 
+        // Removing the presigned part of the URL to return
         const s3ImageUrl = url.split('?')[0];
 
         return s3ImageUrl;

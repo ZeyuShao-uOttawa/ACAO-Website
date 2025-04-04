@@ -19,7 +19,7 @@ const select = ref<boolean>(false);
 const additionalImages = ref<boolean>(true);
 let nextToken: string|null = null;
 
-
+// Assigns selected file to selectFile
 const handleFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
@@ -27,12 +27,14 @@ const handleFileChange = (event: Event) => {
     }
 };
 
+// Retreving images from base AWS S3 bucket using pagination
 const fetchImages = async () => {
     try {
         const res = await imageService.getAllImages(nextToken, 10);
 
         images.value.push(...res.images);
 
+        // If a nextToken is return it means there is more images to paginate, so display load more button, otherwise remove button
         if (res.nextToken) {
             nextToken = res.nextToken;
         } else {
@@ -45,6 +47,7 @@ const fetchImages = async () => {
     }
 }
 
+// Uploads file to AWS S3 using the imageService
 const uploadFile = async () => {
     if (!selectedFile.value) {
         console.error("No file selected.");
@@ -63,10 +66,12 @@ const uploadFile = async () => {
     }
 };
 
+// Assigns the selected image url to selectedImage
 const selectImage = (imageUrl: string) => {
     selectedImage.value = imageUrl;
 };
 
+// Emits the selected image url and closes the ImageSelector
 const confirmImageSelect = () => {
     if (selectedImage.value) {
         emit('update:selectedImageURL', selectedImage.value);
@@ -77,6 +82,7 @@ const confirmImageSelect = () => {
     }
 }
 
+// Resets all ImageSelector values
 const resetImageSelector = () => {
     nextToken = null;
     additionalImages.value = true;

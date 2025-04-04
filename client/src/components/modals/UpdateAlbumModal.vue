@@ -13,6 +13,7 @@ const emit = defineEmits<{
     (event: 'update:reload', value: boolean): void
 }>();
 
+// Close Modal
 const closeUpdateAlbumModal = () => {
     emit('update:showUpdateAlbumModal', false);
 };
@@ -21,7 +22,8 @@ let albumForm = reactive<Album>(props.album);
 
 const galleryService = new GalleryService();
 
-const updateExecDetails = async() => {
+// Update/Add Album information and close modal and reload the page
+const updateAlbumInformation = async() => {
     try {
         await galleryService.updateAlbumDetails(albumForm);
         closeUpdateAlbumModal();
@@ -91,7 +93,7 @@ const updateExecDetails = async() => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeUpdateAlbumModal">Cancel</button>
-                        <button type="button" class="btn btn-primary" @click="updateExecDetails">Add/Update Album</button>
+                        <button type="button" class="btn btn-primary" @click="updateAlbumInformation">Add/Update Album</button>
                     </div>
                 </div>
             </div>

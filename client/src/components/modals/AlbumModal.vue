@@ -29,10 +29,12 @@ const checkUserRoleIsAdmin = (): boolean => {
     return false;
 }
 
+// Retreving images from album AWS S3 folder without pagination
 const fetchImages = async (albumId: string) => {
     images.value = await galleryService.getAllAlbumImages(albumId);
 }
 
+// Assigns selected file to selectFile
 const handleFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
@@ -40,6 +42,7 @@ const handleFileChange = (event: Event) => {
     }
 };
 
+// Uploads file to album AWS S3 folder using the galleryService
 const uploadFile = async () => {
     if (!selectedFile.value) {
         console.error("No file selected.");
@@ -58,12 +61,14 @@ const uploadFile = async () => {
     }
 };
 
+// Opening delete image modal
 const deleteImage = (key: string, url:string) => {
     imageKeyToDelete.value = key;
     imageUrlToDelete.value = url;
     showDeleteImageModal.value = true;
 }
 
+// Checking if user changes albums to fetch new album images
 watch(
     () => props.album,
     (newVal) => {

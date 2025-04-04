@@ -16,6 +16,7 @@ const eventDetails = ref<Event>({
 
 const showModifyEventModal = ref<boolean>(false);
 
+// On component mount retrieve event information
 onMounted(async () => {
     try {
         const event = await eventService.getEventDetails();
@@ -41,6 +42,7 @@ const checkUserRoleIsAdmin = (): boolean => {
     return false;
 }
 
+// Opens link to linktree in new window
 const registerForEvent = () => {
     window.open('https://linktr.ee/uottawaACAO?fbclid=PAZXh0bgNhZW0CMTEAAaaodAAKrYHyVSInSenoUGOiGAxqXO4YHiN35Ui97wWrInG-lBwRIabLbKc_aem_BNJDNNcXcxcdjyFM_8dK0g', '_blank');
 }

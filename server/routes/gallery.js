@@ -22,8 +22,8 @@ router.get('/s3AlbumUrl', verifyRole('admin'), async (req, res) => {
     try {
         const { albumId, fileName, fileType } = req.query;
 
-        if (!fileName || !fileType) {
-        return res.status(400).json({ error: 'Missing fileName or fileType' });
+        if (!albumId|| !fileName || !fileType) {
+        return res.status(400).json({ error: 'Missing albumId, fileName or fileType' });
         }
 
         const url = await generateAlbumUploadURL(albumId, fileName, fileType);
@@ -70,9 +70,9 @@ router.post('/update', verifyRole('admin'), async (req, res) => {
             await album.save();
         }
 
-        res.status(200).json({ message: 'Successfully updated album details' });
+        res.status(200).json({ message: 'Successfully created/updated album details' });
     } catch (err) {
-        res.status(500).json({ error: 'An error occurred while creating a new album' });
+        res.status(500).json({ error: 'An error occurred while creating/updating a album' });
     }
 });
 
@@ -89,7 +89,6 @@ router.delete('/:id', verifyRole('admin'), async (req, res) => {
 
         res.status(200).json({ message: 'Successfully deleted album' });
     } catch (err) {
-        console.log(err)
         res.status(500).json({ error: 'An error occurred while deleting the album' });
     }
 });

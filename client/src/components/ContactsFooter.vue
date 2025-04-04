@@ -2,23 +2,23 @@
 import { reactive, ref, nextTick } from 'vue'
 
 const form = reactive({
-  email: '',
-  text: '',
+    email: '',
+    text: '',
 })
 const show = ref(true)
 
 const onSubmit = (event: any) => {
-  event.preventDefault()
+    event.preventDefault()
 }
 
 const onReset = (event: any) => {
-  event.preventDefault()
-  form.email = ''
-  form.text = ''
-  show.value = false
-  nextTick(() => {
-    show.value = true
-  })
+    event.preventDefault()
+    form.email = ''
+    form.text = ''
+    show.value = false
+    nextTick(() => {
+        show.value = true
+    })
 }
 </script>
 
