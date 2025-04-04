@@ -68,7 +68,7 @@ describe('Event API Routes', () => {
         expect(response.body.error).toBe('An error occurred while fetching the event');
     });
 
-    test('Post /api/event/update should update event details given a valid input', async () => {
+    test('POST /api/event/update should update event details given a valid input', async () => {
         const token = generateToken('admin');
         const newEventData = {
             eventTitle: 'Test Update',
@@ -92,7 +92,7 @@ describe('Event API Routes', () => {
         expect(event.eventImageUrl).toBe('https://test.com/eventUpdate.jpg');
     });
 
-    test('Post /api/event/update should return 500 if `findOneAndUpdate` throws an error', async () => {
+    test('POST /api/event/update should return 500 if `findOneAndUpdate` throws an error', async () => {
         jest.spyOn(Event, 'findOneAndUpdate').mockRejectedValue(new Error('Database error'));
         const token = generateToken('admin');
         const newEventData = {

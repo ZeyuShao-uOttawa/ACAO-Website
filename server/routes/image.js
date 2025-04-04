@@ -36,6 +36,10 @@ router.get('/listImages', async (req, res) => {
 router.delete('/deleteImage', verifyRole('admin'), async (req, res) => {
     try {
         const { key } = req.body;
+        
+        if (!key) {
+            return res.status(400).json({ error: 'Missing image key' });
+        }
 
         const deleteResponse = await deleteImage(key);
 
