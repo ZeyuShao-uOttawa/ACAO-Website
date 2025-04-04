@@ -13,12 +13,14 @@ const emit = defineEmits<{
     (event: 'update:reload', value: boolean): void
 }>();
 
+// Close Modal
 const closeDeleteAlbumModal = () => {
   emit('update:showDeleteImageModal', false);
 };
 
 const imageService = new ImageService();
 
+// Delete image and close modal and reload
 const deleteImage = async() => {
     try {
         await imageService.deleteImage(props.imageKey);

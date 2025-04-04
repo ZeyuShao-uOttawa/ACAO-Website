@@ -16,10 +16,12 @@ const eventService = new EventService();
 
 let eventForm: Event = props.currentEventDetails;
 
+// Close Modal
 const closeModifyEventModal = () => {
     emit('update:showModifyEventModal', false);
 };
 
+// Update event and close modal
 const updateEvent = async() => {
     try {
         await eventService.updateEvent(eventForm);
