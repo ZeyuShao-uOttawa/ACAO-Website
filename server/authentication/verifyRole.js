@@ -5,20 +5,20 @@ const verifyRole = (requiredRole) => {
         const token = req.headers['x-auth-token'];
 
         if (!token) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ error: 'Unauthorized' });
         }
 
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             
             if (decoded.role !== requiredRole) {
-                return res.status(403).json({ message: 'Forbidden' });
+                return res.status(403).json({ error: 'Forbidden' });
             }
 
             req.user = decoded;
             next();
         } catch (error) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ error: 'Unauthorized' });
         }
     };
 };
