@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pull-requests: write
+    
     steps:
     - name: Checkout code of client
       uses: actions/checkout@v3
