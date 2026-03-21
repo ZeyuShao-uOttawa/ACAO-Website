@@ -25,7 +25,7 @@ app.use('/api/gallery', require('./routes/gallery'));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Handle 'raffle2026' redirect
+// Handle 'raffle2026' redirect link
 app.get('/raffle2026', (req, res) => {
     res.redirect(302, 'https://www.zeffy.com/en-CA/ticketing/fortune-and-fame-raffle');
 });
