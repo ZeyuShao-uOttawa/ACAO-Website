@@ -25,6 +25,11 @@ app.use('/api/gallery', require('./routes/gallery'));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Handle 'raffle2026' redirect
+app.get('/raffle2026', (req, res) => {
+    res.redirect(302, 'https://www.zeffy.com/en-CA/ticketing/fortune-and-fame-raffle');
+});
+
 // Handle all other routes with the Vue app
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
