@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, nextTick } from 'vue'
+import MessageService from '../services/messageService'
 
 const form = reactive({
     email: '',
@@ -7,17 +8,28 @@ const form = reactive({
 })
 const show = ref(true)
 
-const onSubmit = (event: any) => {
-    event.preventDefault()
+const messageService = new MessageService();
+
+const onSubmit = async(event: Event) => {
+    event.preventDefault();
+    console.log('Submitting message');
+
+    const status = await messageService.sendMessage(form.email, form.text);
+    
+    if (status == 200) {
+        alert("Successfully sent message to ACAO");
+        reset();
+    } else {
+        alert("Unable to send message to ACAO");
+    }
 }
 
-const onReset = (event: any) => {
-    event.preventDefault()
-    form.email = ''
-    form.text = ''
-    show.value = false
+const reset = (event: any) => {
+    form.email = '';
+    form.text = '';
+    show.value = false;
     nextTick(() => {
-        show.value = true
+        show.value = true;
     })
 }
 </script>
@@ -44,7 +56,7 @@ const onReset = (event: any) => {
                 <BCol md="5"></BCol>
                 <BCol md="4 d-flex flex-column justify-content-center">
                     <h5 class="mt-2">Contact Us</h5>
-                    <BForm class="mb-2" @submit="onSubmit" @reset="onReset" v-if="show">
+                    <BForm class="mb-2" @submit="onSubmit" v-if="show">
                         <BFormGroup class="mb-2">
                           <BFormInput
                             id="contact-email"
@@ -57,7 +69,9 @@ const onReset = (event: any) => {
                         <BFormGroup class="mb-2">
                           <BFormTextarea id="contact-message" v-model="form.text" placeholder="Enter your message here" required />
                         </BFormGroup>
-                        <BButton type="submit" class="beige-button">Submit</BButton>
+                        <BFormGroup class="mb-2">
+                            <BButton type="submit" class="beige-button">Submit</BButton>
+                        </BFormGroup>
                       </BForm>
                 </BCol>
             </BRow>
