@@ -46,7 +46,7 @@ jobs:
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
         git add server/public/
-        git commit -m "Updated server/public with latest build"
+        git diff --cached --quiet || git commit -m "Updated server/public with latest build"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
